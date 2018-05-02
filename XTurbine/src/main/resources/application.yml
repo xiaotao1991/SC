@@ -1,0 +1,19 @@
+server:
+  port: 7941
+
+spring:
+  application:
+    name: XTurbine
+
+eureka:
+  instance:
+    prefer-ip-address: true    #表示启用IP访问
+  client:
+    serviceUrl:
+      defaultZone: http://root:root@192.168.25.1:8900/eureka/
+
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: XConsumerFegin2
+  clusterNameExpression: "'default'"

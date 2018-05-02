@@ -1,0 +1,6 @@
+server:
+  port: 7921
+
+spring:
+  application:
+    name: xconfigserver

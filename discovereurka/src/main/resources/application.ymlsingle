@@ -1,0 +1,22 @@
+server:
+  port: 8900
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: root
+    password: root
+
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://user:password@192.168.25.1:${server.port}/eureka/         #加入了认证机制
+

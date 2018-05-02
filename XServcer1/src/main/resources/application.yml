@@ -1,0 +1,31 @@
+server:
+  port: 7911
+spring:
+  application:
+    name: xserver1        #xserver1-v1   -v1代表版本
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:sql-data/schema.sql
+    data: classpath:sql-data/data.sql
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5   #心跳间隔
+    lease-expiration-duration-in-seconds: 30   #租期到期时间
+    prefer-ip-address: true    #表示启用IP访问
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    metadata-map: #自定义元数据
+      zone: GUIZHOU
+      customer: GUIYANG
+  client:
+    healthcheck:
+      enabled: true
+    eureka-service-url-poll-interval-seconds: 60  # 客户端从Eureka Server集群里更新Eureka Server信息的频率
+    serviceUrl:
+      defaultZone: http://peer1:8900/eureka/
+      #defaultZone: http://root:root@peer1:8900/eureka/     注意高可用的情况下加密码会有问题

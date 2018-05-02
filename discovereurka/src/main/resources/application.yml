@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active: peer3
+---
+server:
+  port: 8900
+
+spring:
+  profiles: peer1
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 3           #心跳间隔
+    hostname: peer1
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 10000     #清理间隔
+  client:
+    eureka-service-url-poll-interval-seconds: 60  # 客户端从Eureka Server集群里更新Eureka Server信息的频率
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://peer2:8901/eureka/,http://peer3:8902/eureka/         #加入了认证机制
+---
+server:
+  port: 8901
+
+spring:
+  profiles: peer2
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 3           #心跳间隔
+    hostname: peer2
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 10000     #清理间隔
+  client:
+    eureka-service-url-poll-interval-seconds: 60  # 客户端从Eureka Server集群里更新Eureka Server信息的频率
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://peer1:8900/eureka/,http://peer3:8902/eureka/         #加入了认证机制
+---
+server:
+  port: 8902
+
+spring:
+  profiles: peer3
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 3           #心跳间隔
+    hostname: peer3
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 10000     #清理间隔
+  client:
+    eureka-service-url-poll-interval-seconds: 60  # 客户端从Eureka Server集群里更新Eureka Server信息的频率
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://peer2:8901/eureka/,http://peer1:8900/eureka/         #加入了认证机制

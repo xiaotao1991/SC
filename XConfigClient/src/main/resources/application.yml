@@ -1,0 +1,6 @@
+server:
+  port: 7981
+
+spring:
+  application:
+    name: xconfigclient

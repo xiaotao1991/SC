@@ -1,0 +1,29 @@
+server:
+  port: 7932
+  context-path: /fegin
+
+spring:
+  application:
+    name: xconsumer-fegin2
+
+eureka:
+  instance:
+    prefer-ip-address: true    #表示启用IP访问
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    serviceUrl:
+      defaultZone: http://root:root@192.168.25.1:8900/eureka/
+logging:
+  level:
+    root: debug      #配置 日志级别
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000     #设置超时时间
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+feign:
+  hystrix:
+    enabled: true
+

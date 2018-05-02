@@ -1,0 +1,20 @@
+server:
+  port: 7951
+
+spring:
+  application:
+    name: xzuul
+
+eureka:
+  instance:
+    prefer-ip-address: true    #表示启用IP访问
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.25.1:8900/eureka/
+
+zuul:
+  ignoredServices: '*'      # 加需要反向代理的服务名字
+  routes:
+    users:                  # 这个任意命名  唯一的就行
+      path: /cs2/**
+      serviceId: xserver1    # 也可以配 服务的  url:http://localhost:xxxx/
